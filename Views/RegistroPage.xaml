@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:converters="clr-namespace:ShopApp.Converters"
+             x:Class="ShopApp.Views.RegistroPage"
+             Title="RegistroPage"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Padding="20, 10, 20, 10">
+            <Image 
+                Source="dotnet_bot.svg" 
+                Aspect="AspectFit" 
+                HeightRequest="100" 
+                Margin="30" />
+            <Label 
+                Text="Crea tu Cuenta"
+                FontSize="Large"
+                FontAttributes="Bold"
+                Margin="5, 0, 0, 20"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Label 
+                Text="Ingresa tu información para crear tu cuenta de acceso a nuestro App."
+                TextColor="LightSlateGrey"
+                FontSize="Small"
+                Margin="20, 0, 20, 10"
+                HorizontalOptions="StartAndExpand" 
+                VerticalOptions="Center" />
+            <Entry 
+                Text="{Binding Registro.Nombre}"
+                Placeholder="Nombre *"  />
+            <Entry 
+                Text="{Binding Registro.Apellido}"
+                Placeholder="Apellido"  />
+            <Entry 
+                x:Name="entryEmail"
+                Text="{Binding Registro.Email}"
+                Placeholder="Email *">
+                <Entry.Behaviors>
+                    <toolkit:EmailValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged" />
+                </Entry.Behaviors>
+            </Entry>
+            <Label x:Name="lblMensajeEmailError" FontSize="Micro" HorizontalOptions="End" TextColor="LightSlateGray">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference entryEmail}, Path=TextColor}" Value="Red" >
+                        <Setter Property="Text" Value="(*) El email no es válido" />
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+            <Entry 
+                Text="{Binding Registro.UserName}"
+                Placeholder="Username *"  />
+            <Entry 
+                Text="{Binding Registro.Telefono}"
+                Keyboard="Numeric"
+                Placeholder="Telefono">
+            </Entry>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                <Entry 
+                    x:Name="entryPassword"
+                    Text="{Binding Registro.Password, Mode=TwoWay}"
+                    Placeholder="Password *"
+                    HorizontalOptions="FillAndExpand"
+                    IsPassword="True" />
+                <ImageButton x:Name="btnPassword" Source="visible.png" HeightRequest="30" Margin="5" BackgroundColor="Transparent" HorizontalOptions="End" Clicked="Button_Clicked" />
+            </StackLayout>
+            <Label FontSize="Micro" HorizontalOptions="Start" Margin="5, 0, 5, 0"  Text="(*) Campos obligatorios"  TextColor="LightSlateGray" />
+
+            <Button 
+                Text="Registrar Usuario"
+                HeightRequest="50"
+                Margin="0, 20, 0, 0"
+                FontSize="Medium"
+                BackgroundColor="#1d94ab"
+                Command="{Binding RegistroMethodCommand}"  />
+            <StackLayout Orientation="Horizontal" Margin="0, 20, 0, 20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                <Label 
+                    Text="Ya tienes una cuenta?"
+                    TextColor="#101010"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"  />
+                <Label 
+                    Text="Inicia Sesion"
+                    TextColor="#407BFF"
+                    Margin="5, 0"
+                    FontSize="Medium"
+                    HorizontalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

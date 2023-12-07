@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopApp.Views.LoginPage"
+             Title="Inicie Sesion"
+             Shell.NavBarIsVisible="false">
+    <VerticalStackLayout VerticalOptions="Center" Margin="20,0,20,0" Spacing="20">
+        <Image 
+            Source="dotnet_bot"
+            HorizontalOptions="Center"
+            HeightRequest="80"
+            WidthRequest="80" />
+        <Label 
+            Text="Bienvenido a Vaxi Drez"
+            TextColor="#101010"
+            FontSize="Large"
+            HorizontalOptions="Center"  />
+        <Label 
+            Text="Ingrese sus credenciales para iniciar el uso de la App"
+            TextColor="LightSlateGrey"
+            FontSize="Small"
+            HorizontalOptions="Center"  />
+        <Entry 
+            Text="{Binding Email}"
+            Placeholder="Email"  />
+        <Entry 
+            Text="{Binding Password}"
+            Placeholder="Password"
+            IsPassword="True" />
+        <Button 
+            Text="Iniciar Sesion"
+            HeightRequest="50"
+            FontSize="Medium"
+            BackgroundColor="#1d94ab"
+            Command="{Binding LoginMethodCommand}"  />
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+            <Label 
+            Text="No estás registrado?"
+            TextColor="#101010"
+            FontSize="Medium"
+            HorizontalOptions="Center"  />
+            <Label 
+            Text="Regístrate ahora!"
+            TextColor="#407BFF"
+                Margin="5, 0"
+            FontSize="Medium"
+            HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>
